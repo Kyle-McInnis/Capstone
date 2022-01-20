@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CDDA2F1B279939DA0070092E /* CapstoneMessengerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA2F1A279939DA0070092E /* CapstoneMessengerApp.swift */; };
-		CDDA2F1D279939DA0070092E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA2F1C279939DA0070092E /* ContentView.swift */; };
+		CDDA2F1D279939DA0070092E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA2F1C279939DA0070092E /* LoginView.swift */; };
 		CDDA2F1F279939DA0070092E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDDA2F1E279939DA0070092E /* Assets.xcassets */; };
 		CDDA2F22279939DA0070092E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDDA2F21279939DA0070092E /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		CDDA2F17279939DA0070092E /* CapstoneMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDDA2F1A279939DA0070092E /* CapstoneMessengerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneMessengerApp.swift; sourceTree = "<group>"; };
-		CDDA2F1C279939DA0070092E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CDDA2F1C279939DA0070092E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CDDA2F1E279939DA0070092E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDDA2F21279939DA0070092E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,7 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				CDDA2F1A279939DA0070092E /* CapstoneMessengerApp.swift */,
-				CDDA2F1C279939DA0070092E /* ContentView.swift */,
+				CDDA2F1C279939DA0070092E /* LoginView.swift */,
 				CDDA2F1E279939DA0070092E /* Assets.xcassets */,
 				CDDA2F20279939DA0070092E /* Preview Content */,
 			);
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDDA2F1D279939DA0070092E /* ContentView.swift in Sources */,
+				CDDA2F1D279939DA0070092E /* LoginView.swift in Sources */,
 				CDDA2F1B279939DA0070092E /* CapstoneMessengerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
