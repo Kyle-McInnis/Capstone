@@ -11,6 +11,10 @@
 		CDDA2F1D279939DA0070092E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA2F1C279939DA0070092E /* LoginView.swift */; };
 		CDDA2F1F279939DA0070092E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDDA2F1E279939DA0070092E /* Assets.xcassets */; };
 		CDDA2F22279939DA0070092E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDDA2F21279939DA0070092E /* Preview Assets.xcassets */; };
+		CDFF7CD027A2515400E6AA5E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CDFF7CCF27A2515400E6AA5E /* FirebaseAuth */; };
+		CDFF7CD227A2515400E6AA5E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CDFF7CD127A2515400E6AA5E /* FirebaseStorage */; };
+		CDFF7CD427A2531700E6AA5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFF7CD327A2531700E6AA5E /* GoogleService-Info.plist */; };
+		CDFF7CD827A2862600E6AA5E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFF7CD727A2862600E6AA5E /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,8 @@
 		CDDA2F1C279939DA0070092E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CDDA2F1E279939DA0070092E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDDA2F21279939DA0070092E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CDFF7CD327A2531700E6AA5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CDFF7CD727A2862600E6AA5E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +32,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDFF7CD027A2515400E6AA5E /* FirebaseAuth in Frameworks */,
+				CDFF7CD227A2515400E6AA5E /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +61,8 @@
 			children = (
 				CDDA2F1A279939DA0070092E /* CapstoneMessengerApp.swift */,
 				CDDA2F1C279939DA0070092E /* LoginView.swift */,
+				CDFF7CD727A2862600E6AA5E /* ImagePicker.swift */,
+				CDFF7CD327A2531700E6AA5E /* GoogleService-Info.plist */,
 				CDDA2F1E279939DA0070092E /* Assets.xcassets */,
 				CDDA2F20279939DA0070092E /* Preview Content */,
 			);
@@ -83,6 +93,10 @@
 			dependencies = (
 			);
 			name = CapstoneMessenger;
+			packageProductDependencies = (
+				CDFF7CCF27A2515400E6AA5E /* FirebaseAuth */,
+				CDFF7CD127A2515400E6AA5E /* FirebaseStorage */,
+			);
 			productName = CapstoneMessenger;
 			productReference = CDDA2F17279939DA0070092E /* CapstoneMessenger.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +125,9 @@
 				Base,
 			);
 			mainGroup = CDDA2F0E279939DA0070092E;
+			packageReferences = (
+				CDFF7CCE27A2515400E6AA5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = CDDA2F18279939DA0070092E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +144,7 @@
 			files = (
 				CDDA2F22279939DA0070092E /* Preview Assets.xcassets in Resources */,
 				CDDA2F1F279939DA0070092E /* Assets.xcassets in Resources */,
+				CDFF7CD427A2531700E6AA5E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDFF7CD827A2862600E6AA5E /* ImagePicker.swift in Sources */,
 				CDDA2F1D279939DA0070092E /* LoginView.swift in Sources */,
 				CDDA2F1B279939DA0070092E /* CapstoneMessengerApp.swift in Sources */,
 			);
@@ -341,6 +360,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CDFF7CCE27A2515400E6AA5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDFF7CCF27A2515400E6AA5E /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDFF7CCE27A2515400E6AA5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CDFF7CD127A2515400E6AA5E /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDFF7CCE27A2515400E6AA5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CDDA2F0F279939DA0070092E /* Project object */;
 }
