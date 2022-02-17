@@ -11,7 +11,9 @@ import SwiftUI
 struct CapstoneMessengerApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            LoginView(didCompleteLoginProcess: {
+                
+            })
         }
     }
 }
