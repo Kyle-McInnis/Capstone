@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD39D4F627C78DB400EEBC85 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39D4F527C78DB400EEBC85 /* ChatLogView.swift */; };
 		CD474ABF27BBF61800C7C5D1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = CD474ABE27BBF61800C7C5D1 /* SDWebImageSwiftUI */; };
 		CD474AC227BE2A2800C7C5D1 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD474AC127BE2A2800C7C5D1 /* ChatUser.swift */; };
 		CD474AC527BE30BC00C7C5D1 /* NewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD474AC427BE30BC00C7C5D1 /* NewMessageView.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD39D4F527C78DB400EEBC85 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		CD474AC127BE2A2800C7C5D1 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		CD474AC427BE30BC00C7C5D1 /* NewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageView.swift; sourceTree = "<group>"; };
 		CD8FA7F027BBDC0100C7B987 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD39D4F427C78D9100EEBC85 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				CD39D4F527C78DB400EEBC85 /* ChatLogView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		CD474AC027BE29FD00C7C5D1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +139,7 @@
 		CDFC362E27ABE655003CD28E /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				CD39D4F427C78D9100EEBC85 /* Chat */,
 				CD474AC327BE308600C7C5D1 /* NewMessage */,
 				CDFC362F27ABE6A1003CD28E /* MessagesView.swift */,
 			);
@@ -217,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD474AC227BE2A2800C7C5D1 /* ChatUser.swift in Sources */,
+				CD39D4F627C78DB400EEBC85 /* ChatLogView.swift in Sources */,
 				CDFC363027ABE6A1003CD28E /* MessagesView.swift in Sources */,
 				CD474AC527BE30BC00C7C5D1 /* NewMessageView.swift in Sources */,
 				CDFF7CD827A2862600E6AA5E /* ImagePicker.swift in Sources */,

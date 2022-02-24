@@ -62,6 +62,8 @@ struct MessagesView: View {
     
     @State var shouldShowLogOutOptions = false
     
+    @State var shouldNavigateToChatLogView = false
+    
     @ObservedObject private var vm = MessagesViewModel()
     
     var body: some View {
@@ -70,6 +72,10 @@ struct MessagesView: View {
             VStack {
                 customNavBar
                 messagesView
+                
+                NavigationLink("", isActive: $shouldNavigateToChatLogView) {
+                    ChatLogView(chatUser: self.chatUser)
+                }
                 
             }
             .overlay(
@@ -100,6 +106,7 @@ struct MessagesView: View {
                 shouldShowLogOutOptions.toggle()
             } label: {
                 Image(systemName: "gearshape.fill")
+                    .foregroundColor(.purple)
                     .font(.system(size: 24, weight: .bold))
             }
         }
@@ -128,23 +135,26 @@ struct MessagesView: View {
         ScrollView {
             ForEach(0..<10, id: \.self) { num in
                 VStack {
-                    HStack(spacing: 16) {
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.system(size: 50))
-                            .padding(8)
-                        
-                        VStack(alignment: .leading) {
-                            Text("Username")
-                                .font(.system(size: 16, weight: .bold))
-                            Text("Message that was sent")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color(.lightGray))
+                    NavigationLink {
+                        Text("temp")
+                    } label: {
+                        HStack(spacing: 16) {
+                            Image(systemName: "person.crop.circle.fill")
+                                .font(.system(size: 50))
+                                .padding(8)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Username")
+                                    .font(.system(size: 16, weight: .bold))
+                                Text("Message that was sent")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(.lightGray))
+                            }
+                            Spacer()
                         }
-                        Spacer()
-                        
-                        Text("10d")
-                            .font(.system(size: 14, weight: .semibold))
                     }
+
+             
                     Divider()
                         .padding(.vertical, 8)
                 }.padding(.horizontal)
@@ -169,19 +179,26 @@ struct MessagesView: View {
             }
             .foregroundColor(.white)
             .padding(.vertical)
-            .background(Color.blue)
+            .background(Color.purple)
             .cornerRadius(32)
             .padding(.horizontal)
             .shadow(radius: 15)
         }
         .fullScreenCover(isPresented: $shouldShowNewMessageScreen) {
-            NewMessageView()
+            NewMessageView(selectNewUser: { user in
+                print(user.email)
+                self.shouldNavigateToChatLogView.toggle()
+                self.chatUser = user
+            })
         }
     }
+    
+    @State var chatUser: ChatUser?
 }
 
 struct MessagesView_Previews: PreviewProvider {
     static var previews: some View {
         MessagesView()
+//        NewMessageView()
     }
 }

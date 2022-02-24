@@ -49,6 +49,7 @@ struct LoginView: View {
                                         .cornerRadius(64)
                                 } else {
                                     Image(systemName: "person.crop.circle.fill")
+                                        .foregroundColor(Color.purple)
                                         .font(.system(size: 64))
                                         .padding()
                                 }
@@ -76,7 +77,7 @@ struct LoginView: View {
                                 .padding(.vertical, 10)
                                 .font(.system(size: 14, weight: .semibold))
                             Spacer()
-                        }.background(Color.blue)
+                        }.background(Color.purple)
                     }
                     
                     Text(self.loginStatusMessage)

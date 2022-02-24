@@ -36,6 +36,8 @@ class CreateNewMessageViewModel: ObservableObject {
 
 struct NewMessageView: View {
     
+    let selectNewUser: (ChatUser) -> ()
+    
     @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var vm = CreateNewMessageViewModel()
@@ -47,6 +49,9 @@ struct NewMessageView: View {
                 
                 ForEach(vm.users) { user in
                     Button {
+                        presentationMode.wrappedValue
+                            .dismiss()
+                        selectNewUser(user)
                         
                     } label: {
                         HStack {
@@ -74,6 +79,7 @@ struct NewMessageView: View {
                             presentationMode.wrappedValue.dismiss()
                         } label: {
                             Text("Cancel")
+                                
                         }
                     }
                 }
@@ -83,7 +89,7 @@ struct NewMessageView: View {
 
 struct NewMessageView_Previews: PreviewProvider {
     static var previews: some View {
-        NewMessageView()
-//        MessagesView()
+//        NewMessageView()
+        MessagesView()
     }
 }
