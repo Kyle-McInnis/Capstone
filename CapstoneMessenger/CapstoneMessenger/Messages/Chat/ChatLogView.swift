@@ -9,52 +9,32 @@ import SwiftUI
 import Firebase
 import simd
 
-struct FirebaseConstants {
-    static let fromId = "fromId"
-    static let toId = "toId"
-    static let text = "text"
-}
-
-// Identifying the text message that is send, who sent the message, and who it is being sent to.
-struct ChatMessage: Identifiable {
-    
-    var id: String { documentId }
-    
-    let documentId: String
-    let fromId, toId, text: String
-    
-    init(documentId: String, data: [String: Any]) {
-        self.documentId = documentId
-        self.fromId = data[FirebaseConstants.fromId] as? String ?? ""
-        self.toId = data[FirebaseConstants.toId] as? String ?? ""
-        self.text = data[FirebaseConstants.text] as? String ?? ""
-    }
-}
-
 class ChatLogViewModel: ObservableObject {
     
     @Published var chatText = ""
     @Published var errorMessage = ""
     @Published var chatMessages = [ChatMessage]()
     
-    let chatUser: ChatUser?
+    var chatUser: ChatUser?
     
     init(chatUser: ChatUser?) {
         self.chatUser = chatUser
         
         fetchMessages()
-        
     }
     
+    var firestoreListener: ListenerRegistration?
+    
     // Shows the messages that have been sent in the chat log
-    private func fetchMessages() {
+    func fetchMessages() {
         guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
         
         guard let toId = chatUser?.uid else { return }
-        FirebaseManager.shared.firestore.collection("messages")
+        firestoreListener?.remove()
+        chatMessages.removeAll()
+        firestoreListener = FirebaseManager.shared.firestore.collection(FirebaseConstants.messages)
             .document(fromId)
             .collection(toId)
-            .order(by: "timestamp")
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     self.errorMessage = "Failed to listen for messages: \(error)"
@@ -85,12 +65,12 @@ class ChatLogViewModel: ObservableObject {
         
          let document =
             FirebaseManager.shared.firestore
-            .collection("messages")
+            .collection(FirebaseConstants.messages)
             .document(fromId)
             .collection(toId)
             .document()
         
-        let messageData = [FirebaseConstants.fromId: fromId, FirebaseConstants.toId: toId, FirebaseConstants.text: self.chatText, "timestamp": Timestamp()] as [String : Any]
+        let messageData = [FirebaseConstants.fromId: fromId, FirebaseConstants.toId: toId, FirebaseConstants.text: self.chatText] as [String : Any]
         
         document.setData(messageData) { error in
             if let error = error {
@@ -100,12 +80,15 @@ class ChatLogViewModel: ObservableObject {
             }
             
             print("Successfully saved current user sending message")
+            
+            self.persistRecentMessage()
+            
             self.chatText = ""
             self.count += 1
             
         }
         
-        let recipientMessageDocument = FirebaseManager.shared.firestore.collection("messages")
+        let recipientMessageDocument = FirebaseManager.shared.firestore.collection(FirebaseConstants.messages)
             .document(toId)
             .collection(fromId)
             .document()
@@ -122,17 +105,64 @@ class ChatLogViewModel: ObservableObject {
         
     }
     
+    // Save recent messages within the chat log view screen
+    private func persistRecentMessage() {
+        guard let chatUser = chatUser else { return }
+        
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid
+        else { return }
+        
+        guard let toId = self.chatUser?.uid else {return}
+        
+         let document = FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.recent_messages)
+            .document(uid)
+            .collection(FirebaseConstants.messages)
+            .document(toId)
+        
+        // Data dictionary for user, includes what information is being saved to chat log view
+        let data = [
+            FirebaseConstants.text: self.chatText,
+            FirebaseConstants.fromId: uid,
+            FirebaseConstants.toId: toId,
+            FirebaseConstants.profileImageUrl: chatUser.profileImageUrl,
+            FirebaseConstants.email: chatUser.email
+        ] as [String : Any]
+        
+        document.setData(data) { error in
+            if let error = error {
+                self.errorMessage = "Failed to save recent message: \(error)"
+                print("Failed to save recent message: \(error)")
+                return
+            }
+        }
+        
+        guard let currentUser = FirebaseManager.shared.currentUser else { return }
+                let recipientRecentMessageDictionary = [
+                    FirebaseConstants.text: self.chatText,
+                    FirebaseConstants.fromId: uid,
+                    FirebaseConstants.toId: toId,
+                    FirebaseConstants.profileImageUrl: currentUser.profileImageUrl,
+                    FirebaseConstants.email: currentUser.email
+                ] as [String : Any]
+        
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.recent_messages)
+                    .document(toId)
+                    .collection(FirebaseConstants.messages)
+                    .document(currentUser.uid)
+                    .setData(recipientRecentMessageDictionary) { error in
+                        if let error = error {
+                            print("Failed to save recipient recent message: \(error)")
+                            return
+                        }
+                    }
+    }
+    
     @Published var count = 0
 }
 
 struct ChatLogView: View {
-    
-    let chatUser: ChatUser?
-    
-    init(chatUser: ChatUser?) {
-        self.chatUser = chatUser
-        self.vm = .init(chatUser: chatUser)
-    }
     
     @ObservedObject var vm: ChatLogViewModel
     
@@ -141,8 +171,11 @@ struct ChatLogView: View {
             messageView
             Text(vm.errorMessage)
         }
-        .navigationTitle(chatUser?.email ?? "")
-            .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(vm.chatUser?.email ?? "")
+        .navigationBarTitleDisplayMode(.inline)
+        .onDisappear {
+            vm.firestoreListener?.remove()
+        }
     }
     
     static let emptyScrollToString = "Empty"
@@ -173,12 +206,26 @@ struct ChatLogView: View {
         }
     }
     
+    @State var showImagePicker = false
+    
     private var chatBar: some View {
+        
         HStack(spacing: 16) {
-            Image(systemName: "photo.on.rectangle")
-                .font(.system(size: 24))
-                .foregroundColor(Color(.darkGray))
+            Button {
+                showImagePicker
+                    .toggle()
+            } label: {
+                Image(systemName: "photo.on.rectangle")
+                    .font(.system(size: 24))
+                    .foregroundColor(Color(.darkGray))
+            }
             ZStack {
+                if let image = self.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 128, height: 128)
+                }
                 TextEditor(text: $vm.chatText)
                     .opacity(vm.chatText.isEmpty ? 0.5 : 1)
             }
@@ -197,8 +244,14 @@ struct ChatLogView: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
+        .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
+            ImagePicker(image: $image)
+        }
     }
+    
+    @State var image: UIImage?
 }
+
 
 struct MessageView: View {
     
@@ -238,7 +291,7 @@ struct MessageView: View {
 struct ChatLogView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ChatLogView(chatUser: .init(data: ["uid": "vFztfLF26pg9xcNyHD61YmUlHTH3", "email": "kyletest1@gmail.com"]))
+//            ChatLogView(chatUser: .init(data: ["uid": "vFztfLF26pg9xcNyHD61YmUlHTH3", "email": "kyletest1@gmail.com"]))
         }
         
     }

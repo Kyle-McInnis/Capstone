@@ -11,6 +11,9 @@
 		CD474ABF27BBF61800C7C5D1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = CD474ABE27BBF61800C7C5D1 /* SDWebImageSwiftUI */; };
 		CD474AC227BE2A2800C7C5D1 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD474AC127BE2A2800C7C5D1 /* ChatUser.swift */; };
 		CD474AC527BE30BC00C7C5D1 /* NewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD474AC427BE30BC00C7C5D1 /* NewMessageView.swift */; };
+		CD71E36727EC53F60012D50D /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71E36627EC53F60012D50D /* RecentMessage.swift */; };
+		CD71E36927EC54E60012D50D /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71E36827EC54E60012D50D /* ChatMessage.swift */; };
+		CD71E36B27EC673F0012D50D /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD71E36A27EC673F0012D50D /* FirebaseConstants.swift */; };
 		CD8FA7F127BBDC0100C7B987 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FA7F027BBDC0100C7B987 /* FirebaseManager.swift */; };
 		CDDA2F1B279939DA0070092E /* CapstoneMessengerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA2F1A279939DA0070092E /* CapstoneMessengerApp.swift */; };
 		CDDA2F1D279939DA0070092E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDA2F1C279939DA0070092E /* LoginView.swift */; };
@@ -28,6 +31,9 @@
 		CD39D4F527C78DB400EEBC85 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		CD474AC127BE2A2800C7C5D1 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		CD474AC427BE30BC00C7C5D1 /* NewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageView.swift; sourceTree = "<group>"; };
+		CD71E36627EC53F60012D50D /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
+		CD71E36827EC54E60012D50D /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		CD71E36A27EC673F0012D50D /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		CD8FA7F027BBDC0100C7B987 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		CD8FA7F327BBEEAA00C7B987 /* SDWebImageSwiftUI-2.0.2 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "SDWebImageSwiftUI-2.0.2"; path = "../../Downloads/SDWebImageSwiftUI-2.0.2"; sourceTree = "<group>"; };
 		CDDA2F17279939DA0070092E /* CapstoneMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +73,8 @@
 			isa = PBXGroup;
 			children = (
 				CD474AC127BE2A2800C7C5D1 /* ChatUser.swift */,
+				CD71E36627EC53F60012D50D /* RecentMessage.swift */,
+				CD71E36827EC54E60012D50D /* ChatMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -83,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8FA7F027BBDC0100C7B987 /* FirebaseManager.swift */,
+				CD71E36A27EC673F0012D50D /* FirebaseConstants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -229,11 +238,14 @@
 			files = (
 				CD474AC227BE2A2800C7C5D1 /* ChatUser.swift in Sources */,
 				CD39D4F627C78DB400EEBC85 /* ChatLogView.swift in Sources */,
+				CD71E36727EC53F60012D50D /* RecentMessage.swift in Sources */,
+				CD71E36927EC54E60012D50D /* ChatMessage.swift in Sources */,
 				CDFC363027ABE6A1003CD28E /* MessagesView.swift in Sources */,
 				CD474AC527BE30BC00C7C5D1 /* NewMessageView.swift in Sources */,
 				CDFF7CD827A2862600E6AA5E /* ImagePicker.swift in Sources */,
 				CD8FA7F127BBDC0100C7B987 /* FirebaseManager.swift in Sources */,
 				CDDA2F1D279939DA0070092E /* LoginView.swift in Sources */,
+				CD71E36B27EC673F0012D50D /* FirebaseConstants.swift in Sources */,
 				CDDA2F1B279939DA0070092E /* CapstoneMessengerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
