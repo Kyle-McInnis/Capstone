@@ -9,6 +9,8 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
+
+// Allows access to the information stored in the firebase application to be used in the app.
 class FirebaseManager: NSObject {
     
     let auth: Auth

@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-// Identifying the text message that is send, who sent the message, and who it is being sent to.
+// Identifying the text message that is sent, who sent the message, and who it is being sent to.
 struct ChatMessage: Identifiable {
     
     var id: String { documentId }

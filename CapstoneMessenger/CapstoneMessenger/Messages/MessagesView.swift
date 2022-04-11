@@ -14,6 +14,7 @@ class MessagesViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var chatUser: ChatUser?
     
+    // Displays the MessagesView screen based on which user is signed in.
     init() {
         
         DispatchQueue.main.async {
@@ -22,8 +23,8 @@ class MessagesViewModel: ObservableObject {
 
         }
         
+        // if user is logged in, the screen will display which user is signed in as well as all of the recent messages the user has sent to other users.
         fetchCurrentUser()
-        
         fetchRecentMessages()
     }
     
@@ -31,6 +32,8 @@ class MessagesViewModel: ObservableObject {
     
     private var firestoreListener: ListenerRegistration?
     
+    
+    // Grabs the recent messages stored in the messages collection. Tries to organize the view of the messages so they appear in the order they were sent in.
     func fetchRecentMessages() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid
             else {return}
@@ -64,6 +67,8 @@ class MessagesViewModel: ObservableObject {
             }
     }
     
+    
+    // Checks the firebase manager database for the current user and brings up their chatUser information if found.
      func fetchCurrentUser() {
         
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid
@@ -84,6 +89,7 @@ class MessagesViewModel: ObservableObject {
                 
             }
             
+            // Displays current information about the user if found on MessagesView screen.
             self.chatUser = .init(data: data)
             
         }
@@ -91,6 +97,7 @@ class MessagesViewModel: ObservableObject {
     
     @Published var isUserCurrentlyLoggedOut = false
     
+    // Will sign the user out if they are already logged in.
     func handleSignOut() {
         isUserCurrentlyLoggedOut.toggle()
         try? FirebaseManager.shared.auth.signOut()

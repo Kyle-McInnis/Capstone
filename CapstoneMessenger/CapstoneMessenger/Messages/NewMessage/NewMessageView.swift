@@ -17,6 +17,8 @@ class CreateNewMessageViewModel: ObservableObject {
         fetchAllUsers()
     }
     
+    
+    // Fetches all of the users that have been created in the messaging app under the "users" collection.
     private func fetchAllUsers() {
         FirebaseManager.shared.firestore.collection("users")
             .getDocuments { documentsSnapshot, error in
@@ -47,6 +49,7 @@ struct NewMessageView: View {
             ScrollView {
                 Text(vm.errorMessage)
                 
+                // Displays each user as a button with their own profile image and email.
                 ForEach(vm.users) { user in
                     Button {
                         presentationMode.wrappedValue

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+// Allows user to bring up the images stored in the iphones camera roll. Used for selecting a profile picture when creating a new account.
 struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var image: UIImage?
@@ -26,6 +27,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             self.parent = parent
         }
         
+        // Will remember the image that was selected from the picker, and then close the camera roll screen automatically.
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             parent.image = info[.originalImage] as? UIImage
             picker.dismiss(animated: true)

@@ -88,6 +88,7 @@ class ChatLogViewModel: ObservableObject {
             
         }
         
+        // Message is also saved to the recipient of the message being sent.
         let recipientMessageDocument = FirebaseManager.shared.firestore.collection(FirebaseConstants.messages)
             .document(toId)
             .collection(fromId)
@@ -137,6 +138,7 @@ class ChatLogViewModel: ObservableObject {
             }
         }
         
+        // Data dictionary for the recipient, inclucing the information saved to their chat log.
         guard let currentUser = FirebaseManager.shared.currentUser else { return }
                 let recipientRecentMessageDictionary = [
                     FirebaseConstants.text: self.chatText,
@@ -220,12 +222,6 @@ struct ChatLogView: View {
                     .foregroundColor(Color(.darkGray))
             }
             ZStack {
-                if let image = self.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 128, height: 128)
-                }
                 TextEditor(text: $vm.chatText)
                     .opacity(vm.chatText.isEmpty ? 0.5 : 1)
             }

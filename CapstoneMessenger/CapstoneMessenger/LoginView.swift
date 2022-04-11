@@ -66,7 +66,7 @@ struct LoginView: View {
                     .padding(12)
                     .background(Color.white)
                         
-                    
+                    // Button function changes depending on if user is creating a new account, or logging in with a previous account.
                     Button {
                         handleAction()
                     } label: {
@@ -98,6 +98,8 @@ struct LoginView: View {
     
     @State var image: UIImage?
     
+    
+    // Will either run the function to log user in or create new account depending on picker selection.
     private func handleAction() {
         if isLoginMode {
             loginUser()
@@ -106,6 +108,9 @@ struct LoginView: View {
         }
     }
     
+    
+    // Checks to see if user has signed in with correct email and password stored in firebase.
+    // Will not let user log in unless log in information is correct an in databse already.
     private func loginUser() {
         FirebaseManager.shared.auth.signIn(withEmail: email, password: password) {
             result, err in
@@ -125,6 +130,8 @@ struct LoginView: View {
     
     @State var loginStatusMessage = ""
     
+    
+    // Function to create a new user account and storing profile image, username, and password in firebase under a user ID (uid).
     private func createNewAccount() {
         if self.image == nil {
             self.loginStatusMessage = "You must select an image"
@@ -147,6 +154,7 @@ struct LoginView: View {
         }
     }
     
+    // Stores the image as a URL string in firebase so the image can be stored. Will store the image with the uid information when storeUserInformation function is called.
     private func persistImageToStorage() {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid
             else { return }
@@ -172,6 +180,8 @@ struct LoginView: View {
         }
     }
     
+    
+    // Stores the profile image and email assoiciated with the uid under a collection called users in firebase.
     private func storeUserInformation(imageProfileUrl: URL) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             return

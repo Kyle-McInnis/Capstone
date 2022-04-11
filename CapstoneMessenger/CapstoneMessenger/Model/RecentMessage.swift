@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 
+// Identifying the recent message that is sent, who sent the message, and who it is being sent to.
 struct RecentMessage: Identifiable {
     
     var id: String { documentId }

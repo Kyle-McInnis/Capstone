@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 
+// setting constants so that I do not have to manually type each string every time.
 struct FirebaseConstants {
     static let fromId = "fromId"
     static let toId = "toId"
@@ -17,4 +18,5 @@ struct FirebaseConstants {
     static let uid = "uid"
     static let messages = "messages"
     static let recent_messages = "recent_messages"
+    
 }
